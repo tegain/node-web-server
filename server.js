@@ -32,9 +32,11 @@ app.use((req, res, next) => {
 	next();
 });
 
-app.use((req, res, next) => {
-	res.render('maintenance.hbs');
-});
+// Add a "maintenance mode",
+// by not calling `next()`, thus blocking all the following middlewares.
+// app.use((req, res, next) => {
+// 	res.render('maintenance.hbs');
+// });
 
 // Use Express middleware for static assets
 // http://expressjs.com/en/starter/static-files.html
@@ -67,6 +69,12 @@ app.get('/about', (req, res) => {
 	// Render specific template, from the default 'Views' folder
   res.render('about.hbs', {
   	pageTitle: 'About page'
+	});
+});
+
+app.get('/projects', (req, res) => {
+	res.render('projects.hbs', {
+		pageTitle: 'Projects page'
 	});
 });
 
